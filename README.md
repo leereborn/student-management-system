@@ -83,3 +83,11 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 // list items in a table
 aws dynamodb scan --table-name students --endpoint-url http://localhost:8000
 ```
+
+## TODO
+
+- Refactor code to use modern async/await instead of callback (Inprogress)
+
+## Future work
+
+- [Alternative data modeling] Use denormed single-table DynamoDB schema. Can use a GSI (global secondary index) to provide alternative access patterns to the table.
