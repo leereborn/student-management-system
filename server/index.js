@@ -42,10 +42,10 @@ app.post("/api/students", (req, res) => {
   dynamodb.put(params, (err, data) => {
     if (err) {
       console.log(err);
-      res.status(500).send("Error saving student");
+      res.status(500).json({ message: "Error saving student" });
     } else {
       console.log("Student saved successfully");
-      res.send("Student saved successfully");
+      res.status(200).json({ message: "Student saved successfully" });
     }
   });
 });

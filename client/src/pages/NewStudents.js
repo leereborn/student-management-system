@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import moment from "moment";
+import { getAgeFromBirthday, isValidEmail } from "../utils/utils";
 
 const NewStudents = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,20 +11,15 @@ const NewStudents = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    if (!firstName || !lastName || !email || !dateOfBirth) {
-      setNotification("Please fill in all fields.");
-      return;
-    }
+    const age = getAgeFromBirthday(dateOfBirth);
 
     if (!isValidEmail(email)) {
-      setNotification("Please enter a valid email address.");
+      alert("Please enter a valid email address.");
       return;
     }
 
-    const age = getAgeFromDate(dateOfBirth);
-
     if (age < 10) {
-      setNotification("The student must be at least 10 years old.");
+      alert("The student must be at least 10 years old.");
       return;
     }
 
@@ -41,32 +36,22 @@ const NewStudents = () => {
         dateOfBirth,
       }),
     })
-      .then((response) => console.log(response))
-      .then((data) => console.log(data))
+      .then((response) => {
+        console.log(response);
+        setNotification(
+          `${firstName} ${lastName} has been added to the system.`
+        );
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setDateOfBirth("");
+      })
       .catch((error) => console.error(error));
-
-    setNotification("The new student has been added to the system.");
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setDateOfBirth("");
-  };
-
-  const isValidEmail = (email) => {
-    // Email validation regex
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
-  const getAgeFromDate = (dateString) => {
-    const today = moment();
-    const birthdate = moment(dateString, "YYYY-MM-DD");
-    return today.diff(birthdate, "years");
   };
 
   return (
     <div>
-      <h1>Add New Students</h1>
+      <h1>Add New Student</h1>
       {notification && <p>{notification}</p>}
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="firstName">First Name:</label>
@@ -98,7 +83,7 @@ const NewStudents = () => {
 
         <label htmlFor="dateOfBirth">Date of Birth (YYYY-MM-DD):</label>
         <input
-          type="text"
+          type="date"
           id="dateOfBirth"
           value={dateOfBirth}
           onChange={(event) => setDateOfBirth(event.target.value)}

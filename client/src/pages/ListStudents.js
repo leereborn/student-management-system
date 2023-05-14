@@ -1,26 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const ListStudents = () => {
-  const [students, setStudents] = useState([
-    {
-      firstName: "John",
-      lastName: "Doe",
-      email: "john.doe@example.com",
-      dateOfBirth: "2002-01-01",
-    },
-    {
-      firstName: "Jane",
-      lastName: "Doe",
-      email: "jane.doe@example.com",
-      dateOfBirth: "2003-02-02",
-    },
-    {
-      firstName: "Bob",
-      lastName: "Smith",
-      email: "bob.smith@example.com",
-      dateOfBirth: "2004-03-03",
-    },
-  ]);
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3001/api/students")
@@ -58,19 +39,18 @@ const ListStudents = () => {
           </tr>
         </thead>
         <tbody>
-          {students &&
-            students.map((student) => (
-              <tr key={student.email}>
-                <td>{`${student.firstName} ${student.lastName}`}</td>
-                <td>{student.email}</td>
-                <td>{student.dateOfBirth}</td>
-                <td>
-                  <button onClick={() => handleDeleteClick(student.email)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+          {students.map((student) => (
+            <tr key={student.email}>
+              <td>{`${student.firstName} ${student.lastName}`}</td>
+              <td>{student.email}</td>
+              <td>{student.dateOfBirth}</td>
+              <td>
+                <button onClick={() => handleDeleteClick(student.email)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

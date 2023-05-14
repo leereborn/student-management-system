@@ -2,15 +2,10 @@ import React, { useState } from "react";
 
 const NewCourses = () => {
   const [courseName, setCourseName] = useState("");
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [notification, setNotification] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (courseName.trim() === "") {
-      alert("Please enter a course name");
-      return;
-    }
 
     // add the new course to the system
     fetch("http://localhost:3001/api/courses", {
@@ -22,18 +17,18 @@ const NewCourses = () => {
         name: courseName,
       }),
     })
-      .then((response) => console.log(response))
-      .then((data) => console.log(data))
+      .then((response) => {
+        console.log(response);
+        setNotification(`${courseName} added successfully`);
+        setCourseName("");
+      })
       .catch((error) => console.error(error));
-
-    setShowSuccessMessage(true);
-    setCourseName("");
   };
 
   return (
     <div>
       <h1>Add New Course</h1>
-      {showSuccessMessage && <div>New course added successfully</div>}
+      {notification && <div>{notification}</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="courseName">Course Name:</label>
@@ -42,6 +37,7 @@ const NewCourses = () => {
             id="courseName"
             value={courseName}
             onChange={(event) => setCourseName(event.target.value)}
+            required
           />
         </div>
         <button type="submit">Submit</button>

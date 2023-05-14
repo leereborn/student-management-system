@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const ListCourses = () => {
-  const [courses, setCourses] = useState([
-    { name: "Course 1" },
-    { name: "Course 2" },
-    { name: "Course 3" },
-  ]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3001/api/courses")

@@ -2,17 +2,16 @@ import "./App.css";
 import React from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
-import Home from "./components/Home";
-import ListCourses from "./components/ListCourses";
-import ListResults from "./components/ListResults";
-import ListStudents from "./components/ListStudents";
-import NewCourses from "./components/NewCourses";
-import NewResults from "./components/NewResults";
-import NewStudents from "./components/NewStudents";
+import Home from "./pages/Home";
+import ListCourses from "./pages/ListCourses";
+import ListResults from "./pages/ListResults";
+import ListStudents from "./pages/ListStudents";
+import NewCourses from "./pages/NewCourses";
+import NewResults from "./pages/NewResults";
+import NewStudents from "./pages/NewStudents";
 import Sidebar from "./components/Sidebar";
 
 function App() {
-  const tempElement = <h1>Temp Element</h1>;
   return (
     <Router>
       <div className="App">

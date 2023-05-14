@@ -36,10 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.sidebar {
-  width: 200px;
-  height: 100vh;
-  background-color: #eee;
-  float: left;
-}
