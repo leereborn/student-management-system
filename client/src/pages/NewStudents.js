@@ -37,14 +37,19 @@ const NewStudents = () => {
       }),
     })
       .then((response) => {
-        console.log(response);
-        setNotification(
-          `${firstName} ${lastName} has been added to the system.`
-        );
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setDateOfBirth("");
+        if (response.status === 200) {
+          setNotification(
+            `${firstName} ${lastName} has been added to the system.`
+          );
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setDateOfBirth("");
+        } else {
+          setNotification(
+            `Something went wrong. Server responded with ${response.status}.`
+          );
+        }
       })
       .catch((error) => console.error(error));
   };

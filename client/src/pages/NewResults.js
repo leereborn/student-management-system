@@ -40,11 +40,16 @@ const NewResults = () => {
       }),
     })
       .then((response) => {
-        console.log(response);
-        setNotification("Result added successfully!");
-        setSelectedCourse("");
-        setSelectedStudent("");
-        setSelectedScore("");
+        if (response.status === 200) {
+          setNotification("Result added successfully!");
+          setSelectedCourse("");
+          setSelectedStudent("");
+          setSelectedScore("");
+        } else {
+          setNotification(
+            `Something went wrong. Server responded with ${response.status}.`
+          );
+        }
       })
       .catch((error) => console.error(error));
   };

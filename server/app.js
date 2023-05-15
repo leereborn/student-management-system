@@ -7,7 +7,6 @@ const {
 } = require("./controllers/studentController.js");
 
 const {
-  updaCourse,
   listCourses,
   deleteCourse,
   updateCourse,
@@ -32,14 +31,17 @@ app.get("/", (req, res) => {
   res.send("Wellcome to the student management system!");
 });
 
+// student routes
 app.post("/api/students", updateStudent);
 app.get("/api/students", listStudents);
 app.delete("/api/students/:email", deleteStudent);
 
+// course routes
 app.post("/api/courses", updateCourse);
 app.get("/api/courses", listCourses);
 app.delete("/api/courses/:name", deleteCourse);
 
+// result routes
 app.post("/api/results", updateResult);
 app.get("/api/results", listResults);
 

@@ -18,9 +18,14 @@ const NewCourses = () => {
       }),
     })
       .then((response) => {
-        console.log(response);
-        setNotification(`${courseName} added successfully`);
-        setCourseName("");
+        if (response.status === 200) {
+          setNotification(`${courseName} added successfully`);
+          setCourseName("");
+        } else {
+          setNotification(
+            `Something went wrong. Server responded with ${response.status}.`
+          );
+        }
       })
       .catch((error) => console.error(error));
   };

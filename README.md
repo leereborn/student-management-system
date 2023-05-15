@@ -86,7 +86,7 @@ aws dynamodb scan --table-name students --endpoint-url http://localhost:8000
 
 ## TODO
 
-- Refactor code to use modern async/await instead of callback (Inprogress)
+- Refactor code to use modern javascript async/await instead of callback to simplify code (In progress)
 
 ## Future work
 
