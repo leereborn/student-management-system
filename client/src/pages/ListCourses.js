@@ -17,10 +17,13 @@ const ListCourses = () => {
     fetch(`http://localhost:3001/api/courses/${name}`, {
       method: "DELETE",
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "success") {
+      .then((response) => {
+        if (response.status === 200) {
           setCourses(courses.filter((course) => course.name !== name));
+        } else {
+          console.error(
+            `Unabel to delete ${name}. Server responded with ${response.status} status code.`
+          );
         }
       })
       .catch((error) => console.error(error));

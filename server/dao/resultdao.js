@@ -1,10 +1,8 @@
 const AWS = require("aws-sdk");
-const { awsConfig } = require("../config.js");
+const { awsConfig, resultTableName } = require("../config.js");
 
 AWS.config.update(awsConfig);
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-
-const resultTableName = "results";
 
 const resultDAO = {
   // create or udpate a result

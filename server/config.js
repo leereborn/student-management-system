@@ -5,4 +5,13 @@ const awsConfig = {
   endpoint: "http://localhost:8000",
 };
 
-exports.awsConfig = awsConfig;
+const courseTableName = "courses";
+const studentTableName = "students";
+const resultTableName = "results";
+
+module.exports = {
+  awsConfig,
+  courseTableName,
+  studentTableName,
+  resultTableName,
+};

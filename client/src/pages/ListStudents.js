@@ -17,10 +17,13 @@ const ListStudents = () => {
     fetch(`http://localhost:3001/api/students/${email}`, {
       method: "DELETE",
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "success") {
+      .then((response) => {
+        if (response.status === 200) {
           setStudents(students.filter((student) => student.email !== email));
+        } else {
+          console.error(
+            `Unabel to delete ${email}. Server responded with ${response.status}.`
+          );
         }
       })
       .catch((error) => console.error(error));

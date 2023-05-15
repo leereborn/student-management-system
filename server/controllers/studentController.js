@@ -1,13 +1,14 @@
 const AWS = require("aws-sdk");
-const { awsConfig } = require("../config.js");
+const {
+  awsConfig,
+  studentTableName,
+  resultTableName,
+} = require("../config.js");
 const studentDAO = require("../dao/studentdao.js");
 const resultDAO = require("../dao/resultdao.js");
 
 AWS.config.update(awsConfig);
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-
-const studentTableName = "students";
-const resultTableName = "results";
 
 module.exports.updateStudent = async (req, res) => {
   const { firstName, lastName, email, dateOfBirth } = req.body;
@@ -65,17 +66,13 @@ module.exports.deleteStudent = async (req, res) => {
     });
     TransactItems.push(...resultItems);
     const transactionParams = { TransactItems };
-    dynamodb.transactWrite(transactionParams, (err, data) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ message: "error" });
-      } else {
-        console.log(`Student ${req.params.email} deleted successfully`);
-        res.status(200).json({ message: "success" });
-      }
-    });
+    await dynamodb.transactWrite(transactionParams).promise();
+    const message = `Student ${req.params.email} deleted successfully`;
+    console.log(message);
+    res.status(200).json({ message });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "error" });
+    const message = `Error deleting student ${req.params.email}`;
+    console.error(message, err);
+    res.status(500).json({ message });
   }
 };

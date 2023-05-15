@@ -1,13 +1,5 @@
-const AWS = require("aws-sdk");
-const { awsConfig } = require("../config.js");
 const studentDAO = require("../dao/studentdao.js");
 const resultDAO = require("../dao/resultdao.js");
-
-AWS.config.update(awsConfig);
-const dynamodb = new AWS.DynamoDB.DocumentClient();
-
-const resultTableName = "results";
-const studentTableName = "students";
 
 module.exports.updateResult = async (req, res) => {
   const { selectedCourse, selectedStudent, selectedScore } = req.body;

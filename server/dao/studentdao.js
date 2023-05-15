@@ -1,10 +1,8 @@
 const AWS = require("aws-sdk");
-const { awsConfig } = require("../config.js");
+const { awsConfig, studentTableName } = require("../config.js");
 
 AWS.config.update(awsConfig);
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-
-const studentTableName = "students";
 
 const studentDAO = {
   // create or udpate a student
