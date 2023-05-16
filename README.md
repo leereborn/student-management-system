@@ -1,6 +1,17 @@
 # student-management-system
 
-Interview assessment demo - full stack student management app.
+Interview assessment demo - Node/React full stack student management app.
+
+## Requirements
+
+A **one page** app that has:
+
+- A homepage with a left-hand nav bar that holds links to other pages
+- A new student page to create and persist students with input validations
+- A student list page to list all students in tabular form and support deletion of individual student
+- Simialr to student, it should have a new course page and a course list page
+- A new result page to submit course name, student name, and the corresponding score. These fields are selectable dropdowns that are populated by existing values in the system
+- A result list page to list all results in tabular form. When a student or course gets deleted, all its corresponding result records should also be deleted from the system.
 
 ## Local Deployment
 
